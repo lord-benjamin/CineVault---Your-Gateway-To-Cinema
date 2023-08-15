@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --black1: #101820;
+  --black2: #08111d;
+  --black3: #020f21;
+  --black-light: #17336e;
+  --black-lighter: #26488b;
+  --orange: #F65058;
+  --yellow: #FEC20C;
+  --gradient: linear-gradient(98.37deg, #FEC20C 0.99%, #F65058 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--black1);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black3);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--black-lighter);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--black-light);
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--black-light);
+}
+.skeleton::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, var(--black-light) 0%, var(--black-lighter) 55%, var(--black-light) 100%);
+  animation: shimmer 1s infinite;
+  content: "";
+}
+@keyframes shimmer {
+  100% {
+      transform: translateX(100%);
+  }
+}

@@ -1,0 +1,6 @@
+.castDiv::-webkit-scrollbar {
+    display: none;
+}
+.profile-img img{
+    height: 100%;
+}

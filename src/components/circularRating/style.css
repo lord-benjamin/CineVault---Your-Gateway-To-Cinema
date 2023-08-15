@@ -1,0 +1,6 @@
+.circularRating{
+    background-color: var(--black2);
+}
+.circularRating .CircularProgressbar-trail{
+    stroke: transparent;
+}

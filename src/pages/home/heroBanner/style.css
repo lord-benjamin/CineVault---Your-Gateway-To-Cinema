@@ -1,0 +1,25 @@
+.lazy-load-image-background{
+    width: 100%;
+    height: 100%;
+}
+.lazy-load-image-background img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.opacity-layer{
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        #101820 80%
+    );
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.btn{
+    background: var(--gradient);
+}
