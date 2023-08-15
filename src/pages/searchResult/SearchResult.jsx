@@ -53,7 +53,7 @@ const SearchResult = () => {
                         <>
                             <div className='text-white text-sm md:text-xl mb-4 md:mb-8'>
                                 {`Search ${data?.total_results===1 ? "Result" : "Results"} for`}
-                                <span className="font-bold">{` '${query}'`}</span>
+                                <span className="font-bold italic">{` '${query}'`}</span>
                             </div>
                             <InfiniteScroll
                                 className='flex gap-[10px] md:gap-[20px] mb-10'
