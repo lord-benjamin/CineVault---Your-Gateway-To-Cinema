@@ -5,7 +5,7 @@ const Genres = ({data}) => {
     const {genres} = useSelector((state) => state.home);
 
     return (
-        <div className='relative flex flex-wrap justify-end gap-2'>
+        <div className='relative flex flex-wrap justify-end gap-2 allGenres'>
             {data?.map((genre)=>{
                 if(!genres[genre]?.name){
                     return;
