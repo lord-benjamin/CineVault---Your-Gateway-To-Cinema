@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
+import {BiLinkExternal} from "react-icons/bi"
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import useFetch from "../../../hooks/useFetch";
@@ -36,35 +37,39 @@ const DetailsBanner = ({video,crew}) => {
 
     const moneyConvert = (totalMoney) => {
         let num=0;
+        let decimal=0;
         if(totalMoney >= 1000000000){
             num = totalMoney/1000000000;
-            if(num.toFixed(2).slice(-2) === "00"){
-                return `${num} Billion`;
+            decimal = num.toFixed(2);
+            if(decimal.slice(-2) === "00"){
+                return `${decimal.slice(0,-3)} Billion`;
             }
-            if(num.toFixed(2).slice(-1) == "0"){
-                return `${num.toFixed(1)} Billion`;
+            if(decimal.slice(-1) === "0"){
+                return `${decimal.slice(0,-1)} Billion`;
             }
-            return `${num.toFixed(2)} Billion`;
+            return `${decimal} Billion`;
         }
         if(totalMoney >= 1000000){
             num = totalMoney/1000000;
-            if(num.toFixed(2).slice(-2) === "00"){
-                return `${num} Million`;
+            decimal = num.toFixed(2);
+            if(decimal.slice(-2) === "00"){
+                return `${decimal.slice(0,-3)} Million`;
             }
-            if(num.toFixed(2).slice(-1) === "0"){
-                return `${num.toFixed(1)} Million`;
+            if(decimal.slice(-1) === "0"){
+                return `${decimal.slice(0,-1)} Million`;
             }
-            return `${num.toFixed(2)} Million`;
+            return `${decimal} Million`;
         }
         if(totalMoney >= 1000){
             num = totalMoney/1000;
-            if(num.toFixed(2).slice(-2) === "00"){
-                return `${num} Thousand`;
+            decimal = num.toFixed(2);
+            if(decimal.slice(-2) === "00"){
+                return `${decimal.slice(0,-3)} Thousand`;
             }
-            if(num.toFixed(2).slice(-1) === "0"){
-                return `${num.toFixed(1)} Thousand`;
+            if(decimal.slice(-1) === "0"){
+                return `${decimal.slice(0,-1)} Thousand`;
             }
-            return `${num.toFixed(2)} Thousand`;
+            return `${decimal} Thousand`;
         }
         return totalMoney;
     }
@@ -79,6 +84,7 @@ const DetailsBanner = ({video,crew}) => {
                                 <Img src={url.backdrop + data?.backdrop_path} />
                             </div>
                             <ContentWrapper>
+                            {console.log(data)}
                                 <div className="flex relative flex-col gap-4 md:gap-8 md:flex-row">
                                     <div className='flex-shrink-0'>
                                         {data?.poster_path ? (
@@ -91,13 +97,13 @@ const DetailsBanner = ({video,crew}) => {
                                         <div className='text-xl md:text-5xl mb-1 md:mb-2'>
                                             {`${data?.title || data?.name} · ${dayjs(data?.release_date || data?.first_air_date).format("YYYY")}`}
                                         </div>
-                                        <div className='mb-4 italic opacity-70 font-bold text-xs md:text-base'>
+                                        <div className='mb-4 italic opacity-70 text-xs md:text-base'>
                                             {data?.tagline}
                                         </div>
-                                        <div className='flex mb-7'>
+                                        <div className='flex mb-7 genres'>
                                             <Genres data={_genres}></Genres>
                                         </div>
-                                        <div className="flex space-x-4 mb-6">
+                                        <div className="flex items-center space-x-4 mb-6">
                                             <div className='text-md md:text-xl w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex-shrink-0'>
                                                 <CircularRating rating={data?.vote_average.toFixed(1)} />
                                             </div>
@@ -111,6 +117,16 @@ const DetailsBanner = ({video,crew}) => {
                                                 <span className='text-md md:text-xl transition-all duration-700 ease-in-out text'>Watch Trailer</span>
                                             </div>
                                         </div>
+                                        {(data?.homepage && data?.homepage!=="") && (
+                                            <div className='hover:text-orange cursor-pointer mb-6 duration-200 w-max'>
+                                                <a href={data?.homepage} target='_blank' rel='noreferrer'>
+                                                    <div className="flex items-center space-x-2 md:space-x-3">
+                                                        <span className='text-3xl md:text-4xl'><BiLinkExternal/></span>
+                                                        <h1 className='text-sm md:text-lg text-center'>{`Visit ${mediaType==="tv" ? "TV Series" : "Movie"} Homepage`}</h1>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        )}
                                         <div className='mb-4 md:mb-6'>
                                             <div className='text-md md:text-xl mb-2 md:mb-1'>Overview</div>
                                             <div className='text-xs md:text-sm opacity-70 text-justify'>
@@ -281,6 +297,7 @@ const DetailsBanner = ({video,crew}) => {
                                         <div className="w-[100px] md:w-[150px] h-[25px] md:h-[30px] rounded-full skeleton"></div>
                                     </div>
                                 </div>
+                                <div className="w-[250px] h-[25px] md:h-[30px] rounded-full mb-6 skeleton"></div>
                                 <div className="w-[150px] h-[25px] md:h-[30px] rounded-full mb-3 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-3 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-3 skeleton"></div>
