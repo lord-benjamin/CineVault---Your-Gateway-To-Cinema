@@ -16,6 +16,9 @@
     bottom: 0;
     left: 0;
 } */
+.genres .allGenres{
+    justify-content: start;
+}
 .circularRating{
     padding: 0;
 }
