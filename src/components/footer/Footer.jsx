@@ -49,7 +49,7 @@ const Footer = () => {
                             <input
                                 className="inputBox flex-1 h-[30px] md:h-[40px] px-2 md:px-5 bg-white text-black outline-none rounded-l-lg"
                                 type="text"
-                                placeholder="Search for a Movie or TV Show or a Person..."
+                                placeholder="Search Movies, TV Series or People..."
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyUp={searchQueryHandler}
                             />

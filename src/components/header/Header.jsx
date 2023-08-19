@@ -99,7 +99,7 @@ const Header = () => {
                             autoFocus="true"
                             className="inputBox w-full h-full bg-white text-black outline-none py-0 text-sm md:h-[60px] md:text-lg"
                             type="text"
-                            placeholder="Search for a Movie or TV Show or a Person..."
+                            placeholder="Search Movies, TV Series or People..."
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyUp={searchQueryHandler}
                         />

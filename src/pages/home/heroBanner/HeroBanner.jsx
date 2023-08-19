@@ -45,7 +45,7 @@ const HeroBanner = () => {
                         <input
                             className="inputBox flex-1 text-xs md:text-lg h-[35px] md:h-[50px] p-4 md:p-6 bg-white text-black outline-none rounded-l-full"
                             type="text"
-                            placeholder="Search for a Movie or TV Show or a Person..."
+                            placeholder="Search Movies, TV Series or People..."
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyUp={searchQueryHandler}
                         />
