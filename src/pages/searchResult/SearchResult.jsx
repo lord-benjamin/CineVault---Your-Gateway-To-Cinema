@@ -6,6 +6,7 @@ import "./style.css"
 
 import { fetchDataFromApi } from '../../utils/api'
 import ContentWrapper from '../../components/contentWrapper/ContentWrapper'
+import PersonCard from '../../components/personCard/PersonCard'
 import MovieCard from '../../components/movieCard/MovieCard'
 import LoadingSpinner from '../../components/spinner/LoadingSpinner'
 import NoResultsFallback from '../../assets/no-results.png';
@@ -64,11 +65,12 @@ const SearchResult = () => {
                                 loader={<LoadingSpinner/>}
                             >
                                 {data?.results?.map((item,idx) => {
+                                    {/* {console.log(item)} */}
                                     if(item?.media_type==="person"){
-                                        return;
+                                        return <PersonCard key={idx} data={item} />
                                     }
                                     return (
-                                        <MovieCard key={idx} data={item} />
+                                        <MovieCard key={idx} data={item} fromSearch={true} />
                                     )
                                 })}
                             </InfiniteScroll>

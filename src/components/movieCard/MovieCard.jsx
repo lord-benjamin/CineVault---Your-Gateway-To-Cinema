@@ -36,9 +36,11 @@ const MovieCard = ({data,fromSearch,mediaType}) => {
                 <span className="text-sm sm:text-base md:text-lg mb-0 md:mb-1 title">
                     {data?.title || data?.name}
                 </span>
-                <span className="text-[10px] sm:text-[12px] md:text-[15px] opacity-50 leading-5">
-                    {dayjs(data?.release_date || data?.first_air_date).format("MMM D, YYYY")}
-                </span>
+                {!(data?.release_date || data?.first_air_date || data?.air_date) ? null : (
+                    <span className="text-[10px] md:text-[15px] opacity-50 leading-5">
+                        {dayjs(data?.release_date || data?.first_air_date || data?.air_date).format("MMM D, YYYY")}
+                    </span>
+                )}
             </div>
         </div>
     )

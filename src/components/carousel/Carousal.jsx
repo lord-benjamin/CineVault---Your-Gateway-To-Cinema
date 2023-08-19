@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
@@ -14,6 +15,8 @@ import "./style.css";
 
 const Carousal = ({data,loading,endpoint}) => {
     const carouselContainer = useRef();
+    const {mediaType,id} = useParams();
+    // console.log(data);
     const {url} = useSelector((state) => state.home);
     const navigate = useNavigate();
     const skIt = () => {
@@ -52,11 +55,21 @@ const Carousal = ({data,loading,endpoint}) => {
                     {!loading ? (
                         <div className="carouselDiv flex gap-[10px] overflow-y-hidden mx-[-20px] py-0 px-[20px] md:gap-[20px]  md:m-0 md:p-0" ref={carouselContainer} >
                             {data?.map((item)=>{
-                                const posterUrl = item?.poster_path ? url.poster+item?.poster_path : PosterFallback;
+                                const posterUrl = endpoint==="episode" ? (item?.still_path ? url.poster+item?.still_path : PosterFallback) : (item?.poster_path ? url.poster+item?.poster_path : PosterFallback);
                                 return (
                                     <div
                                     key={item?.id}
-                                    onClick={() => navigate(`/${item?.media_type || endpoint}/${item?.id}`)}
+                                    onClick={() => {
+                                        if(endpoint === "season"){
+                                            navigate(`/tv/${id}/season/${item?.season_number}`)
+                                        }
+                                        else if(endpoint === "episode"){
+                                            navigate(`/tv/${item?.show_id}/season/${item?.season_number}/episode/${item?.episode_number}`);
+                                        }
+                                        else{
+                                            navigate(`/${item?.media_type || endpoint}/${item?.id}`)
+                                        }
+                                    }}
                                     className="w-[125px] cursor-pointer md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] flex-shrink-0  hover:scale-95 duration-200">
                                         <div className="poster-block relative w-full aspect-[2/3] bg-cover bg-center flex items-end justify-between p-[10px]">
                                             <Img src={posterUrl} />
@@ -71,9 +84,11 @@ const Carousal = ({data,loading,endpoint}) => {
                                             <span className="text-sm md:text-xl mb-0 md:mb-1 title">
                                                 {item?.title || item?.name}
                                             </span>
-                                            <span className="text-[10px] md:text-[15px] opacity-50 leading-5">
-                                                {dayjs(item?.release_date || item?.first_air_date).format("MMM D, YYYY")}
-                                            </span>
+                                            {!(item?.release_date || item?.first_air_date || item?.air_date) ? null : (
+                                                <span className="text-[10px] md:text-[15px] opacity-50 leading-5">
+                                                    {dayjs(item?.release_date || item?.first_air_date || item?.air_date).format("MMM D, YYYY")}
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                 )

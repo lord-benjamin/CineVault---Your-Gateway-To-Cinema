@@ -18,6 +18,7 @@ import "./style.css";
 const DetailsBanner = ({video,crew}) => {
     const {mediaType,id} = useParams();
     const {data,loading} = useFetch(`/${mediaType}/${id}`)
+    // console.log(data);
 
     const {url} = useSelector((state) => state.home);
 
@@ -84,7 +85,6 @@ const DetailsBanner = ({video,crew}) => {
                                 <Img src={url.backdrop + data?.backdrop_path} />
                             </div>
                             <ContentWrapper>
-                            {console.log(data)}
                                 <div className="flex relative flex-col gap-4 md:gap-8 md:flex-row">
                                     <div className='flex-shrink-0'>
                                         {data?.poster_path ? (
@@ -127,12 +127,14 @@ const DetailsBanner = ({video,crew}) => {
                                                 </a>
                                             </div>
                                         )}
-                                        <div className='mb-4 md:mb-6'>
-                                            <div className='text-md md:text-xl mb-2 md:mb-1'>Overview</div>
-                                            <div className='text-xs md:text-sm opacity-70 text-justify'>
-                                                {data?.overview}
+                                        {data?.overview && (
+                                            <div className='mb-4 md:mb-6'>
+                                                <div className='text-md md:text-xl mb-2 md:mb-1'>Overview</div>
+                                                <div className='text-xs md:text-sm opacity-70 text-justify'>
+                                                    {data?.overview}
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
                                         {(data?.status || data?.release_date || data?.runtime || data?.first_air_date) && (
                                             <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
                                                 {!data?.status ? null : (
@@ -156,6 +158,26 @@ const DetailsBanner = ({video,crew}) => {
                                                         <span className='font-bold'>Runtime:</span>
                                                         <span className='opacity-70'>
                                                             {toHoursAndMinutes(data?.runtime)}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                        {(mediaType==="tv" && (data?.number_of_seasons || data?.number_of_episodes)) && (
+                                            <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
+                                                {!data?.number_of_seasons ? null : (
+                                                    <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
+                                                        <span className='font-bold'>Total Seasons:</span>
+                                                        <span className='opacity-70'>
+                                                            {data?.number_of_seasons}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                                {!data?.number_of_episodes ? null : (
+                                                    <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
+                                                        <span className='font-bold'>Total Episodes:</span>
+                                                        <span className='opacity-70'>
+                                                            {data?.number_of_episodes}
                                                         </span>
                                                     </div>
                                                 )}
@@ -302,6 +324,7 @@ const DetailsBanner = ({video,crew}) => {
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-3 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-3 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-8 skeleton"></div>
+                                <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-1/2 md:w-1/3 h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-2/3 md:w-1/3 h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>

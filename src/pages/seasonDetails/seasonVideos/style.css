@@ -1,30 +1,7 @@
-.backdrop-img .lazy-load-image-background{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-/* .opacity-layer{
-    width: 100%;
-    height: 30%;
-    background: linear-gradient(
-        180deg,
-        transparent,
-        #101820 80%
-    );
-    position: absolute;
-    bottom: 0;
-    left: 0;
-} */
-.genres .allGenres{
-    justify-content: start;
-}
-.circularRating{
-    padding: 0;
-}
-.playbtn svg{
+.playbtn play{
     height: 100%;
     width: 100%;
+
 }
 .triangle {
     stroke-dasharray: 240;
@@ -39,9 +16,6 @@
     stroke-dashoffset: 1300;
     transition: all 0.5s ease-in-out;
 }
-.playbtn:hover .text{
-    color: var(--orange);
-}
 .playbtn:hover .triangle {
     stroke-dashoffset: 0;
     opacity: 1;
@@ -51,4 +25,14 @@
 .playbtn:hover .circle {
     stroke-dashoffset: 0;
     stroke: var(--orange);
+}
+.name{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.videoDiv::-webkit-scrollbar {
+    display: none;
 }

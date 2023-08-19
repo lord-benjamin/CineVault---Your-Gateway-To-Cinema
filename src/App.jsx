@@ -8,6 +8,9 @@ import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Home from "./pages/home/Home.jsx";
 import Details from "./pages/details/Details.jsx";
+import SeasonDetails from "./pages/seasonDetails/SeasonDetails.jsx";
+import EpisodeDetails from "./pages/seasonDetails/episodeDetails/EpisodeDetails.jsx";
+import Person from "./pages/person/Person.jsx";
 import Explore from "./pages/explore/Explore.jsx";
 import SearchResult from "./pages/searchResult/SearchResult.jsx";
 import PageNotFound from "./pages/404/PageNotFound.jsx";
@@ -55,6 +58,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/:mediaType/:id" element={<Details/>} />
+        <Route path="/tv/:tvId/season/:seasonNumber" element={<SeasonDetails/>}></Route>
+        <Route path="/tv/:tvId/season/:seasonNumber/episode/:episodeNumber" element={<EpisodeDetails/>}></Route>
+        <Route path="/person/:id" element={<Person/>} />
         <Route path="/search/:query" element={<SearchResult/>} />
         <Route path="/explore/:mediaType" element={<Explore/>} />
         <Route path="*" element={<PageNotFound/>} />

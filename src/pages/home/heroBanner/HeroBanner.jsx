@@ -38,14 +38,14 @@ const HeroBanner = () => {
             <ContentWrapper>
                 <div className="flex flex-col items-center text-white text-center relative max-w-[1200px] my-0 mx-auto">
                     <span className="text-[45px] tracking-widest font-bebas md:text-8xl">CineVault: Explore Cinema</span>
-                    <span className="text-sm font-medium my-2 mb-5 md:text-xl">
+                    <span className="text-sm font-medium my-2 mb-4 md:mb-6 md:text-xl">
                     Unveil cinematic wonders, embark on an exhilarating movie odyssey today!
                     </span>
-                    <div className="flex items-center w-full">
+                    <div className="flex items-center w-full md:w-3/4">
                         <input
                             className="inputBox flex-1 text-xs md:text-lg h-[35px] md:h-[50px] p-4 md:p-6 bg-white text-black outline-none rounded-l-full"
                             type="text"
-                            placeholder="Search for a Movie or TV Show..."
+                            placeholder="Search for a Movie or TV Show or a Person..."
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyUp={searchQueryHandler}
                         />

@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 import "./style.css";
 
-import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
-import Img from "../../../components/lazyLoadImage/Img";
-import CastFallback from "../../../assets/no-photo.png";
+import ContentWrapper from "../../../../components/contentWrapper/ContentWrapper";
+import Img from "../../../../components/lazyLoadImage/Img";
+import CastFallback from "../../../../assets/no-photo.png";
 
-const Cast = ({ data, loading }) => {
+const Cast = ({ heading, data, loading }) => {
     const { url } = useSelector((state) => state.home);
     const navigate = useNavigate();
 
@@ -25,13 +25,13 @@ const Cast = ({ data, loading }) => {
     return (
         <div className="relative mb-8 md:mb-16">
             <ContentWrapper>
-                <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">Top Cast</div>
+                <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">{heading}</div>
                 {!loading ? (
                     <div className="castDiv flex gap-[20px] overflow-y-hidden overflow-x-scroll mx-[-20px] py-0 px-[20px] md:m-0 md:p-0">
-                        {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Cast</div> : data?.map((item) => {
+                        {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No {heading}</div> : data?.map((item,idx) => {
                             let imgUrl = item?.profile_path ? url.profile+item?.profile_path : CastFallback
                             return (
-                                <div key={item?.id} className="text-center text-white max-w-min cursor-pointer hover:scale-95 duration-200" onClick={() => navigate(`/person/${item?.id}`)}>
+                                <div key={idx} className="text-center text-white max-w-min cursor-pointer hover:scale-95 duration-200" onClick={() => navigate(`/person/${item?.id}`)}>
                                     <div className="profile-img w-[125px] md:w-[175px] h-[200px] md:h-[300px] rounded-2xl mb-4 md:mb-6 overflow-hidden">
                                         <Img src={imgUrl} />
                                     </div>
@@ -39,7 +39,7 @@ const Cast = ({ data, loading }) => {
                                         {item?.name}
                                     </h1>
                                     <div className="text-xs md:text-base opacity-50">
-                                        {item?.character}
+                                        {item?.character || item?.job}
                                     </div>
                                 </div>
                             )

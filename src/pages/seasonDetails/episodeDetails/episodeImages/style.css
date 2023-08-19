@@ -1,0 +1,3 @@
+.imageDiv::-webkit-scrollbar {
+    display: none;
+}
