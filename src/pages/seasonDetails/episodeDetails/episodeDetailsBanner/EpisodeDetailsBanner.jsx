@@ -41,7 +41,7 @@ const EpisodeDetailsBanner = () => {
                                     </div>
                                     <div className="text-white w-full">
                                         <div className='text-xl md:text-5xl mb-4 md:mb-8'>
-                                            {`${data?.title || data?.name} · ${dayjs(data?.release_date || data?.air_date).format("YYYY")}`}
+                                            {`${data?.title || data?.name}${(data?.release_date || data?.air_date) ? " · "+dayjs(data?.release_date || data?.air_date).format("YYYY") : ""}`}
                                         </div>
                                         <div className="flex items-center space-x-4 mb-6">
                                             <div className='text-md md:text-xl w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex-shrink-0'>
