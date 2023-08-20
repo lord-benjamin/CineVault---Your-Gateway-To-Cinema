@@ -23,10 +23,11 @@ const PersonCard = ({data}) => {
                 <span className="text-sm sm:text-base md:text-lg mb-0 md:mb-1 name">
                     {data?.name}
                 </span>
-                {/* <span className="text-[10px] sm:text-[12px] md:text-[15px] opacity-50 leading-5">
-                    {dayjs(data?.birthday).format("YYYY")} - {`${data?.deathday ? dayjs(data?.deathday).format("YYYY") : "Current"}`}
-                </span> */}
-                
+                {/* {!(data?.birthday && data?.deathday) ? null : (
+                    <span className="text-[10px] sm:text-[12px] md:text-[15px] opacity-50 leading-5">
+                        {dayjs(data?.birthday).format("YYYY")} - {`${data?.deathday ? dayjs(data?.deathday).format("YYYY") : "Current"}`}
+                    </span>
+                )} */}
             </div>
         </div>
     )
