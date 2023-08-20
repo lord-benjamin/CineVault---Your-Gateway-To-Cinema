@@ -5,6 +5,8 @@ import useFetch from '../../hooks/useFetch';
 import DetailsBanner from './detailsBanner/DetailsBanner.jsx';
 import Cast from './cast/Cast.jsx';
 import Season from './carousels/Season.jsx';
+import PosterSection from './images/PosterSection';
+import ImageSection from './images/ImageSection';
 import VideoSection from './videos/VideoSection.jsx';
 import Similar from './carousels/Similar.jsx';
 import Recommendation from './carousels/Recommendation.jsx';
@@ -12,6 +14,7 @@ import Recommendation from './carousels/Recommendation.jsx';
 const Details = () => {
     const {mediaType,id} = useParams();
     const {data,loading} = useFetch(`/${mediaType}/${id}`)
+    const {data: images,loading: imagesLoading} = useFetch(`/${mediaType}/${id}/images`)
     const {data: videos,loading: videosLoading} = useFetch(`/${mediaType}/${id}/videos`)
     const {data: credits,loading: creditsLoading} = useFetch(`/${mediaType}/${id}/credits`)
     // console.log(data);
@@ -31,6 +34,8 @@ const Details = () => {
             <DetailsBanner video={videos?.results?.[trailer]} crew={credits?.crew} />
             <Cast data={credits?.cast} loading={creditsLoading} />
             {(mediaType==="tv") ? <Season id={id}/> : null}
+            <PosterSection data={images?.posters} loading={imagesLoading}/>
+            <ImageSection data={images?.backdrops} loading={imagesLoading}/>
             <VideoSection data={videos} loading={videosLoading}/>
             <Similar mediaType={mediaType} id={id} />
             <Recommendation mediaType={mediaType} id={id} />

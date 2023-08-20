@@ -10,7 +10,6 @@ import CastFallback from "../../../assets/no-photo.png";
 
 const PersonImages = ({ data, loading }) => {
     const { url } = useSelector((state) => state.home);
-    const navigate = useNavigate();
 
     const skIt = () => {
         return (
@@ -29,7 +28,7 @@ const PersonImages = ({ data, loading }) => {
                         {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Photos</div> : data?.map((item,idx) => {
                             let imgUrl = item?.file_path ? url.profile+item?.file_path : CastFallback
                             return (
-                                <div key={idx} className="text-center text-white max-w-min cursor-pointer hover:scale-95 duration-200" onClick={() => navigate(`/person/${item?.id}`)}>
+                                <div key={idx} className="text-center text-white max-w-min">
                                     <div className="profile-img w-[125px] md:w-[175px] h-[200px] md:h-[300px] rounded-2xl mb-4 md:mb-6 overflow-hidden">
                                         <Img src={imgUrl} />
                                     </div>

@@ -1,14 +1,13 @@
-
 import React from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 import "./style.css";
 
-import ContentWrapper from "../../../../components/contentWrapper/ContentWrapper";
-import Img from "../../../../components/lazyLoadImage/Img";
-import ScreenshotFallback from "../../../../assets/no-screenshot.png";
+import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
+import Img from "../../../components/lazyLoadImage/Img";
+import ScreenshotFallback from "../../../assets/no-screenshot.png";
 
-const EpisodeImages = ({ data, loading }) => {
+const ImageSection = ({ data, loading }) => {
 
     const {url} = useSelector((state) => state.home);
 
@@ -23,11 +22,11 @@ const EpisodeImages = ({ data, loading }) => {
     return (
         <div className="relative mb-8 md:mb-16">
             <ContentWrapper>
-                <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">Screenshots</div>
+                <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">Backdrops</div>
                 {!loading ? (
                     <div className="imageDiv flex gap-[10px] overflow-x-auto mx-[-20px] py-0 px-[20px] md:gap-[20px] md:m-0 md:p-0">
                     {/* {console.log(data)} */}
-                        {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Screenshots</div> : data?.map((image) => {
+                        {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Backdrops</div> : data?.map((image) => {
                             {/* console.log(video) */}
                             let imgUrl = (image?.file_path) ? url.poster+image?.file_path : ScreenshotFallback;
                             return (
@@ -55,4 +54,4 @@ const EpisodeImages = ({ data, loading }) => {
     );
 };
 
-export default EpisodeImages;
+export default ImageSection;

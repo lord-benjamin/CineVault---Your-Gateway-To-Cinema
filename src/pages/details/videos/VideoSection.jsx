@@ -31,7 +31,7 @@ const VideoSection = ({ data, loading }) => {
                     <div className="videoDiv flex gap-[10px] overflow-x-auto mx-[-20px] py-0 px-[20px] md:gap-[20px] md:m-0 md:p-0">
                         {data?.results?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Videos</div> : data?.results?.map((video) => {
                             {/* console.log(video) */}
-                            let imgUrl = (video?.key && video?.size>480) ? "https://img.youtube.com/vi/"+video?.key+"/hqdefault.jpg" : ThumbnailFallback;
+                            let imgUrl = (video?.key) ? "https://img.youtube.com/vi/"+video?.key+"/hqdefault.jpg" : ThumbnailFallback;
                             return (
                                 <div key={video?.id} className="w-[200px] aspect-video flex-shrink-0 md:w-[calc(25%-15px)] cursor-pointer playbtn" onClick={() => {
                                     setVideoId(video?.key)

@@ -14,7 +14,7 @@ import PosterFallback from "../../../assets/no-poster.png"
 const SeasonDetailsBanner = ({video}) => {
     const {tvId,seasonNumber} = useParams();
     const {data,loading} = useFetch(`/tv/${tvId}/season/${seasonNumber}`)
-    console.log(data);
+    // console.log(data);
 
     const {url} = useSelector((state) => state.home);
 

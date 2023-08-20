@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "./style.css";
 
@@ -9,6 +9,7 @@ import Img from "../../../components/lazyLoadImage/Img";
 import CastFallback from "../../../assets/no-photo.png";
 
 const Cast = ({ data, loading }) => {
+    const {mediaType,id} = useParams();
     const { url } = useSelector((state) => state.home);
     const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ const Cast = ({ data, loading }) => {
     return (
         <div className="relative mb-8 md:mb-16">
             <ContentWrapper>
-                <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">Top Cast</div>
+                <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">{`${mediaType==="tv" ? "Top Cast" : "Cast"}`}</div>
                 {!loading ? (
                     <div className="castDiv flex gap-[20px] overflow-y-hidden overflow-x-scroll mx-[-20px] py-0 px-[20px] md:m-0 md:p-0">
                         {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Cast</div> : data?.map((item) => {

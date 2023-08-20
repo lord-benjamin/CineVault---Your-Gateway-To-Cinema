@@ -41,7 +41,7 @@ const HeroBanner = () => {
                     <span className="text-sm font-medium my-2 mb-4 md:mb-6 md:text-xl">
                     Unveil cinematic wonders, embark on an exhilarating movie odyssey today!
                     </span>
-                    <div className="flex items-center w-full md:w-3/4">
+                    <div className="flex items-center w-full sm:w-3/4">
                         <input
                             className="inputBox flex-1 text-xs md:text-lg h-[35px] md:h-[50px] p-4 md:p-6 bg-white text-black outline-none rounded-l-full"
                             type="text"

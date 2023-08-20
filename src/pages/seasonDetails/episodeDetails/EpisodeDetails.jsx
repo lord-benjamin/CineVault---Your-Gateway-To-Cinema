@@ -12,7 +12,7 @@ const EpisodeDetails = () => {
     const {data,loading} = useFetch(`/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}`)
     const {data: images,loading: imagesLoading} = useFetch(`/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}/images`)
     const {data: videos,loading: videosLoading} = useFetch(`/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}/videos`)
-    console.log(data);
+    // console.log(data);
 
     return (
         <div>
