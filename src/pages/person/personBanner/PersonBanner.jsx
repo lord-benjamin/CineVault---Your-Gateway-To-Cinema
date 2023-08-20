@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import {BiLinkExternal} from "react-icons/bi"
+import {BsFacebook,BsInstagram,BsTiktok,BsTwitter,BsYoutube} from "react-icons/bs"
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper.jsx";
 import useFetch from '../../../hooks/useFetch';
@@ -14,7 +15,7 @@ import CastFallback from "../../../assets/no-photo.png"
 const PersonBanner = () => {
     const {id} = useParams();
     const {data,loading} = useFetch(`/person/${id}`)
-    const {data: movies,loading: moviesLoading} = useFetch(`/person/${id}/movie_credits`)
+    const {data: externalId, loading: externalIdLoading} = useFetch(`/person/${id}/external_ids`)
     // console.log(movies);
 
     const {url} = useSelector((state) => state.home);
@@ -24,6 +25,10 @@ const PersonBanner = () => {
         1: "Female",
         2: "Male",
         3: "Non-Binary"
+    }
+
+    const showSocialMedia = () => {
+
     }
 
     return (
@@ -116,6 +121,60 @@ const PersonBanner = () => {
                                                 </div>
                                             </div>
                                         )}
+                                        {!(externalId?.facebook_id || externalId.instagram_id || externalId?.tiktok_id || externalId?.twitter_id || externalId?.youtube_id) ? null : (
+                                            <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
+                                                {!externalId?.facebook_id ? null : (
+                                                    <a href={"https://facebook.com/"+externalId?.facebook_id} target='__blank'>
+                                                        <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
+                                                            <span className='font-bold hidden md:flex'>Facebook</span>
+                                                            <span className='opacity-100 md:opacity-70 font-bold flex justify-center items-center md:text-xl'>
+                                                                <BsFacebook/>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                )}
+                                                {!externalId?.instagram_id ? null : (
+                                                    <a href={"https://instagram.com/"+externalId?.instagram_id} target='__blank'>
+                                                        <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
+                                                            <span className='font-bold hidden md:flex'>Instagram</span>
+                                                            <span className='opacity-100 md:opacity-70 font-bold flex justify-center items-center md:text-xl'>
+                                                                <BsInstagram/>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                )}
+                                                {!externalId?.tiktok_id ? null : (
+                                                    <a href={"https://tiktok.com/@"+externalId?.tiktok_id} target='__blank'>
+                                                        <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
+                                                            <span className='font-bold hidden md:flex'>Tiktok</span>
+                                                            <span className='opacity-100 md:opacity-70 font-bold flex justify-center items-center md:text-xl'>
+                                                                <BsTiktok/>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                )}
+                                                {!externalId?.twitter_id ? null : (
+                                                    <a href={"https://twitter.com/"+externalId?.twitter_id} target='__blank'>
+                                                        <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
+                                                            <span className='font-bold hidden md:flex'>Twitter</span>
+                                                            <span className='opacity-100 md:opacity-70 font-bold flex justify-center items-center md:text-xl'>
+                                                                <BsTwitter/>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                )}
+                                                {!externalId?.youtube_id ? null : (
+                                                    <a href={"https://youtube.com/"+externalId?.youtube_id} target='__blank'>
+                                                        <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
+                                                            <span className='font-bold hidden md:flex'>Youtube</span>
+                                                            <span className='opacity-100 md:opacity-70 font-bold flex justify-center items-center md:text-xl'>
+                                                                <BsYoutube/>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </ContentWrapper>
@@ -139,6 +198,7 @@ const PersonBanner = () => {
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-1/3 md:w-1/4 h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
+                                <div className="w-full h-[20px] md:h-[25px] rounded-full skeleton"></div>
                             </div>
                         </div>
                     </ContentWrapper>
