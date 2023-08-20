@@ -95,7 +95,7 @@ const DetailsBanner = ({video,crew}) => {
                                     </div>
                                     <div className="text-white w-full">
                                         <div className='text-xl md:text-5xl mb-1 md:mb-2'>
-                                            {`${data?.title || data?.name} · ${dayjs(data?.release_date || data?.first_air_date).format("YYYY")}`}
+                                            {`${data?.title || data?.name}${(data?.release_date || data?.first_air_date) ? " · "+dayjs(data?.release_date || data?.first_air_date).format("YYYY") : ""}`}
                                         </div>
                                         <div className='mb-4 italic opacity-70 text-xs md:text-base'>
                                             {data?.tagline}
