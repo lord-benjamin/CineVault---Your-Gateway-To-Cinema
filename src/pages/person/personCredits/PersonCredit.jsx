@@ -15,17 +15,17 @@ const PersonCredit = ({data,loading}) => {
     // const [data,setData] = useState(null);
     // const [pageNo,setPageNo] = useState(1);
     // const [loading,setLoading] = useState(false);
-    const headingContainer = useRef();
+    // const headingContainer = useRef();
     const {id} = useParams();
-    const perPage = 10;
-    const [lastPos,setLastPos] = useState(0)
+    // const perPage = 10;
+    // const [lastPos,setLastPos] = useState(0)
     
     const [endpoint,setEndpoint] = useState("movie_credits");
     const {data:credits,loading:creditsLoading} = useFetch(`/person/${id}/${endpoint}`);
     // console.log(credits?.cast)
-    let casts = credits?.cast;
-    let crews = credits?.crew; 
-    let res = casts
+    // let casts = credits?.cast;
+    // let crews = credits?.crew; 
+    // let res = casts
     // console.log(res);
     // console.log(casts)
     // console.log(crews)
@@ -33,33 +33,40 @@ const PersonCredit = ({data,loading}) => {
     // console.log(data);
     // console.log(credits);
 
-    const onTypeTabChange = (tab) => {
+    const onTabChange = (tab) => {
         setEndpoint(tab==="Movies" ? "movie_credits" : "tv_credits");
     }
-    const onCharacterTabChange = (tab) => {
-        res = tab==="Cast" ? casts : crews;
+
+    const skIt = () => {
+        return (
+            <div className="w-[calc(50%-5px)] cursor-pointer sm:w-[calc(33.33%-6.66px)] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] flex-shrink-0 mb-2 md:mb-5">
+                <div className="rounded-[12px] w-full aspect-[2/3] skeleton"></div>
+                <div className="flex flex-col mt-6 md:mt-8">
+                    <div className="w-full h-[20px] mb-3 rounded-full skeleton"></div>
+                    <div className="w-1/2 h-[20px] rounded-full skeleton"></div>
+                </div>
+            </div>
+        )
     }
 
     return (
         <div className='min-h-[90vh] '>
-            <ContentWrapper>
-                <div className='h-full w-full flex flex-col md:flex-row gap-3 justify-between md:items-center mb-5'>
-                    <span className='text-3xl md:text-4xl text-white font-bebas tracking-wider' ref={headingContainer}>{`${data?.name}'s`}</span>
-                    <div className='flex flex-col sm:flex-row gap-3'>
-                        <SwitchTabs data={["Movies","TV Series"]} onTabChange={onTypeTabChange} />
-                        <div className='flex gap-3 tracking-wider'>
-                            <span className='text-white font-bebas text-lg items-center flex'>as a</span>
-                            <SwitchTabs data={["Cast","Crew"]} onTabChange={onCharacterTabChange} />
+            {!loading && (
+                <ContentWrapper>
+                    <div className='h-full w-full flex flex-col sm:flex-row gap-1 justify-between items-center mb-5'>
+                        <span className='text-3xl md:text-4xl text-white font-bebas tracking-wider'>{`${data?.name}'s`}</span>
+                        <div className='flex flex-col sm:flex-row gap-3'>
+                            <SwitchTabs data={["Movies","TV Series"]} onTabChange={onTabChange} />
                         </div>
                     </div>
-                </div>
-            </ContentWrapper>
+                </ContentWrapper>
+            )}
             {/* {creditsLoading && <LoadingSpinner initial={true} />} */}
             {!creditsLoading ? (
                 <ContentWrapper>
-                    {res?.length>0 ? (
+                    {credits?.cast?.length>0 ? (
                         <div className='flex gap-[10px] md:gap-[20px] mb-10' style={{flexFlow: "row wrap"}}>
-                            {res?.map((item,idx) => {
+                            {credits?.cast?.map((item,idx) => {
                                 {/* console.log(item); */}
                                 return (
                                     <MovieCard key={idx} data={item} fromSearch={false} mediaType={`${endpoint==="tv_credits" ? "tv" : "movie"}`} />
@@ -74,7 +81,25 @@ const PersonCredit = ({data,loading}) => {
                     )}
                 </ContentWrapper>
             ) : (
-                <LoadingSpinner initial={true} />
+                <ContentWrapper>
+                    <div className='flex gap-[10px] md:gap-[20px] mb-10' style={{flexFlow: "row wrap"}}>
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                        {skIt()}
+                    </div>
+                </ContentWrapper>
             )}
         </div>
     )

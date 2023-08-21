@@ -33,7 +33,7 @@ const PersonBanner = () => {
 
     return (
         <div className='w-full bg-black1 pt-28 mb-12 md:mb-16 md:pt-36 min-h-[700px] relative'>
-            {!loading ? (
+            {(!loading && !externalIdLoading) ? (
                 <>
                     {!!data && (
                         <React.Fragment>

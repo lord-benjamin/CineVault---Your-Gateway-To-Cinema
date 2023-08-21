@@ -12,6 +12,7 @@ const Person = () => {
     const {id} = useParams();
     const {data,loading} = useFetch(`/person/${id}`)
     const {data:images,loading:imagesLoading} = useFetch(`/person/${id}/images`)
+    
 
     return (
         <div>
