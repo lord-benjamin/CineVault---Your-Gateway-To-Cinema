@@ -36,14 +36,14 @@ const PosterSection = ({ data, loading }) => {
             <ContentWrapper>
                 <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">Posters</div>
                 <div className="w-full h-full relative">
-                    <div className="w-12 h-full absolute top-0 left-0 z-10 bg-black1 bg-opacity-0 hover:bg-opacity-80 hidden md:flex flex-col justify-center items-center duration-200 cursor-pointer" onClick={() => navigation("left")}>
-                        <FaAngleLeft className="text-4xl text-white" />
-                        {/* <div></div> */}
-                    </div>
-                    <div className="w-12 h-full absolute top-0 right-0 z-10 bg-black1 bg-opacity-0 hover:bg-opacity-80 hidden md:flex flex-col justify-center items-center duration-200 cursor-pointer" onClick={() => navigation("right")}>
-                        <FaAngleRight className="text-4xl text-white" />
-                        {/* <div></div> */}
-                    </div>
+                    {data?.length!==0 && <div>
+                        <div className="w-12 h-full absolute top-0 left-0 z-10 bg-black1 bg-opacity-0 hover:bg-opacity-80 hidden md:flex flex-col justify-center items-center duration-200 cursor-pointer" onClick={() => navigation("left")}>
+                            <FaAngleLeft className="text-4xl text-white" />
+                        </div>
+                        <div className="w-12 h-full absolute top-0 right-0 z-10 bg-black1 bg-opacity-0 hover:bg-opacity-80 hidden md:flex flex-col justify-center items-center duration-200 cursor-pointer" onClick={() => navigation("right")}>
+                            <FaAngleRight className="text-4xl text-white" />
+                        </div>
+                    </div>}
                     {!loading ? (
                         <div className="imageDiv flex gap-[10px] overflow-x-auto mx-[-20px] py-0 px-[20px] md:gap-[20px] md:m-0 md:p-0" ref={carouselContainer}>
                         {/* {console.log(data)} */}
