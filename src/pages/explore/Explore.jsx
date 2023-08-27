@@ -2,6 +2,7 @@ import React, { useState , useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 import "./style.css";
 
@@ -92,6 +93,8 @@ const Explore = () => {
         fetchInitialData();
     }
 
+    const animatedComponents = makeAnimated();
+
     return (
         <div className='min-h-[90vh] pt-[90px] md:pt-[130px]'>
             <ContentWrapper>
@@ -110,6 +113,7 @@ const Explore = () => {
                             getOptionValue={(option) => option.id}
                             onChange={onChange}
                             placeholder="Filter by Genres"
+                            components={animatedComponents}
                             className="react-select-container w-full md:max-w-[500px] md:min-w-[250px]"
                             classNamePrefix="react-select"
                         />

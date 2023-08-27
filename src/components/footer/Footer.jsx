@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/home-page-logo.png"; 
+import tmdb from "../../assets/tmdb.svg";
+import justwatch from "../../assets/justwatch.svg";
 
 const Footer = () => {
     const [query, setQuery] = useState("");
@@ -34,9 +36,20 @@ const Footer = () => {
         <footer className="py-6 bg-black3 z-50">
             <ContentWrapper>
                 <div className="flex flex-col md:flex-row justify-between text-white z-50">
-                    <div className="flex flex-col items-center md:items-start w-full md:w-1/2 space-y-3 mb-5 md:mb-0 z-50">
+                    <div className="flex flex-col items-center md:items-start w-full md:w-1/2 space-y-1 md:space-y-3 mb-5 md:mb-0 z-50">
                         <div className="cursor-pointer w-max">
                             <img className="h-[35px] md:h-[50px]" src={logo} alt="logo" onClick={() => navigate("/")} />
+                        </div>
+                        <div className="flex flex-col md:flex-row items-center pb-3 md:pb-0 gap-1.5 md:gap-4">
+                            <p className="opacity-75 text-sm md:text-base text-center font-bebas tracking-wider">powered by<span className="hidden md:inline">:</span></p>
+                            <div className="flex items-center justify-center gap-3.5 md:gap-5">
+                                <div className="cursor-pointer w-max">
+                                    <a href="https://www.themoviedb.org/" target="__blank"><img className="h-[20px]" src={tmdb} alt="attribution-tmdb"/></a>
+                                </div>
+                                <div className="cursor-pointer w-max">
+                                    <a href="https://www.justwatch.com/" target="__blank"><img className="h-[15px]" src={justwatch} alt="attribution-tmdb"/></a>
+                                </div>
+                            </div>
                         </div>
                         <p className="opacity-75 text-xs md:text-sm text-center md:text-justify">Welcome to CineVault, your ultimate movie database hub. Discover an extensive collection of films, and tv series, from timeless classics to the latest releases. Immerse yourself in comprehensive film details, trailer, and official videos. Our platform offers personalized recommendations for an unparalleled cinematic experience. Unveil the mesmerizing world of cinema and embark on a captivating journey with CineVault.</p>
                     </div>
@@ -59,7 +72,7 @@ const Footer = () => {
                 </div>
                 <hr className="border border-white w-full my-7 opacity-20 rounded-full z-50" />
                 <div className="flex flex-col md:flex-row justify-between items-center text-white opacity-75 text-sm space-y-3 md:space-y-0 z-50">
-                    <p className="text-center md:text-left z-50">© {d.getFullYear()} CineVault. All Rights Reserved. Designed and Developed by Dhruv Arora</p>
+                    <p className="text-center md:text-left z-50">© {d.getFullYear()} CineVault. All Rights Reserved. Designed and Developed by Dhruv Arora.</p>
                     <div className="flex space-x-5 text-lg z-50">
                         <a href="https://www.facebook.com/profile.php?id=100076975973927" target="_blank" rel="noreferrer"><span className="w-10 h-10 bg-black rounded-full flex items-center justify-center cursor-pointer border-black hover:text-orange hover:border-orange border duration-200"><FaFacebookF /></span></a>
                         <a href="https://www.instagram.com/dhruv_a_26" target="_blank" rel="noreferrer"><span className="w-10 h-10 bg-black rounded-full flex items-center justify-center cursor-pointer border-black hover:text-orange hover:border-orange border duration-200"><FaInstagram /></span></a>

@@ -21,20 +21,15 @@ const PersonCredit = ({data,loading}) => {
     // const [lastPos,setLastPos] = useState(0)
     
     const [endpoint,setEndpoint] = useState("movie_credits");
+    const [role,setRole] = useState("cast");
     const {data:credits,loading:creditsLoading} = useFetch(`/person/${id}/${endpoint}`);
-    // console.log(credits?.cast)
-    // let casts = credits?.cast;
-    // let crews = credits?.crew; 
-    // let res = casts
-    // console.log(res);
-    // console.log(casts)
-    // console.log(crews)
 
-    // console.log(data);
-    // console.log(credits);
-
-    const onTabChange = (tab) => {
+    const onTypeTabChange = (tab) => {
         setEndpoint(tab==="Movies" ? "movie_credits" : "tv_credits");
+    }
+
+    const onRoleTabChange = (tab) => {
+        setRole(tab==="Cast" ? "cast" : "crew");
     }
 
     const skIt = () => {
@@ -55,8 +50,10 @@ const PersonCredit = ({data,loading}) => {
                 <ContentWrapper>
                     <div className='h-full w-full flex flex-col sm:flex-row gap-1 justify-between items-center mb-5'>
                         <span className='text-3xl md:text-4xl text-white font-bebas tracking-wider'>{`${data?.name}'s`}</span>
-                        <div className='flex flex-col sm:flex-row gap-3'>
-                            <SwitchTabs data={["Movies","TV Series"]} onTabChange={onTabChange} />
+                        <div className='flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3'>
+                            <SwitchTabs data={["Movies","TV Series"]} onTabChange={onTypeTabChange} />
+                            <span className='font-bebas text-white'>As A</span>
+                            <SwitchTabs data={["Cast","Crew"]} onTabChange={onRoleTabChange} />
                         </div>
                     </div>
                 </ContentWrapper>
@@ -64,9 +61,9 @@ const PersonCredit = ({data,loading}) => {
             {/* {creditsLoading && <LoadingSpinner initial={true} />} */}
             {!creditsLoading ? (
                 <ContentWrapper>
-                    {credits?.cast?.length>0 ? (
+                    {credits?.[role]?.length>0 ? (
                         <div className='flex gap-[10px] md:gap-[20px] mb-10' style={{flexFlow: "row wrap"}}>
-                            {credits?.cast?.map((item,idx) => {
+                            {credits?.[role]?.map((item,idx) => {
                                 {/* console.log(item); */}
                                 return (
                                     <MovieCard key={idx} data={item} fromSearch={false} mediaType={`${endpoint==="tv_credits" ? "tv" : "movie"}`} />
@@ -76,7 +73,7 @@ const PersonCredit = ({data,loading}) => {
                     ) : (
                         <div className='w-full relative flex flex-col items-center justify-center h-[calc(90vh-130px)] md:h-[calc(90vh-200px)] text-white'>
                             <img src={NoResultsFallback} className='h-40 md:h-60' />
-                            <h1 className='text-md md:text-2xl opacity-50'>No Results Found</h1>
+                            <h1 className='text-md md:text-2xl opacity-50'>{`No ${endpoint==="tv_credits" ? "TV Series" : "Movies"} as a ${role==="cast" ? "Cast" : "Crew"} Found`}</h1>
                         </div>
                     )}
                 </ContentWrapper>

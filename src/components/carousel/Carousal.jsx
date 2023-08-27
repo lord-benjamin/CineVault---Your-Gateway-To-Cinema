@@ -53,7 +53,7 @@ const Carousal = ({data,loading,endpoint}) => {
                         </div>
                     </div>}
                     {!loading ? (
-                        <div className="carouselDiv flex gap-[10px] overflow-y-hidden mx-[-20px] py-0 px-[20px] md:gap-[20px]  md:m-0 md:p-0" ref={carouselContainer} >
+                        <div className="carouselDiv flex gap-[10px] overflow-y-hidden mx-[-20px] py-0 px-[20px] md:gap-[20px] md:m-0 md:p-0" ref={carouselContainer} >
                             {data?.map((item)=>{
                                 const posterUrl = endpoint==="episode" ? (item?.still_path ? url.poster+item?.still_path : PosterFallback) : (item?.poster_path ? url.poster+item?.poster_path : PosterFallback);
                                 return (
