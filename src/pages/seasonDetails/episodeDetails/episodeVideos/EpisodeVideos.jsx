@@ -29,7 +29,7 @@ const EpisodeVideos = ({ data, loading }) => {
                 <div className="text-3xl md:text-4xl text-white font-bebas tracking-wider mb-4">Videos</div>
                 {!loading ? (
                     <div className="videoDiv flex gap-[10px] overflow-x-auto mx-[-20px] py-0 px-[20px] md:gap-[20px] md:m-0 md:p-0">
-                    {console.log(data)}
+                    {/* {console.log(data)} */}
                         {data?.results?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Videos</div> : data?.results?.map((video) => {
                             {/* console.log(video) */}
                             let imgUrl = (video?.key) ? "https://img.youtube.com/vi/"+video?.key+"/hqdefault.jpg" : ThumbnailFallback;

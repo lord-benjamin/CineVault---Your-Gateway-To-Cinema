@@ -14,7 +14,7 @@ import PosterFallback from "../../../assets/no-poster.png"
 const SeasonDetailsBanner = ({video}) => {
     const {tvId,seasonNumber} = useParams();
     const {data,loading} = useFetch(`/tv/${tvId}/season/${seasonNumber}`)
-    // console.log(data);
+    console.log(data);
 
     const {url} = useSelector((state) => state.home);
 
@@ -41,8 +41,15 @@ const SeasonDetailsBanner = ({video}) => {
                                             {`${data?.title || data?.name}${(data?.release_date || data?.air_date) ? " · "+dayjs(data?.release_date || data?.air_date).format("YYYY") : ""}`}
                                         </div>
                                         <div className="flex items-center space-x-4 mb-6">
-                                            <div className='text-md md:text-xl w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex-shrink-0'>
-                                                <CircularRating rating={data?.vote_average.toFixed(1)} />
+                                            <div className='flex justify-center items-center gap-2'>
+                                                <div className='text-md md:text-xl w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex-shrink-0'>
+                                                    <CircularRating rating={data?.vote_average.toFixed(1)} />
+                                                </div>
+                                                {!data?.vote_count ? null : (
+                                                    <div className='text-xs text-center md:text-sm font-semibold text-white border-2 border-orange p-1 md:p-2 rounded-md md:rounded-lg uppercase'>
+                                                        {data?.vote_count} voted
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className='flex items-center space-x-3 cursor-pointer playbtn' onClick={() => {
                                                 setShow(true)
@@ -110,11 +117,14 @@ const SeasonDetailsBanner = ({video}) => {
                         <div className="flex-shrink-0 w-full block rounded-[12px] aspect-[2/3] md:max-w-[350px] skeleton"></div>
                             <div className="w-full">
                                 <div className="w-full md:w-3/4 h-[30px] md:h-[40px] mb-4 md:mb-8 rounded-full skeleton"></div>
-                                <div className="flex space-x-4 mb-6">
-                                    <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-full skeleton"></div>
-                                    <div className="flex items-center space-x-3">
+                                <div className="flex space-x-3 mb-6">
+                                    <div className='flex justify-center items-center gap-2'>
                                         <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-full skeleton"></div>
-                                        <div className="w-[100px] md:w-[150px] h-[25px] md:h-[30px] rounded-full skeleton"></div>
+                                        <div className='w-[60px] md:w-[80px] h-[50px] lg:h-[30px] rounded-md lg:rounded-full skeleton'></div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-full skeleton"></div>
+                                        <div className="w-[60px] md:w-[80px] lg:w-[150px] h-[50px] lg:h-[30px] rounded-md lg:rounded-full skeleton"></div>
                                     </div>
                                 </div>
                                 <div className="w-[150px] h-[25px] md:h-[30px] rounded-full mb-3 skeleton"></div>

@@ -104,8 +104,15 @@ const DetailsBanner = ({video,crew}) => {
                                             <Genres data={_genres}></Genres>
                                         </div>
                                         <div className="flex items-center space-x-4 mb-6">
-                                            <div className='text-md md:text-xl w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex-shrink-0'>
-                                                <CircularRating rating={data?.vote_average.toFixed(1)} />
+                                            <div className='flex justify-center items-center gap-2'>
+                                                <div className='text-md md:text-xl w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex-shrink-0'>
+                                                    <CircularRating rating={data?.vote_average.toFixed(1)} />
+                                                </div>
+                                                {!data?.vote_count ? null : (
+                                                    <div className='text-xs text-center md:text-sm font-semibold text-white border-2 border-orange p-1 md:p-2 rounded-md md:rounded-lg uppercase'>
+                                                        {data?.vote_count} voted
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className='flex items-center space-x-3 cursor-pointer playbtn' onClick={() => {
                                                 setShow(true)
@@ -183,10 +190,25 @@ const DetailsBanner = ({video,crew}) => {
                                                 )}
                                             </div>
                                         )}
+                                        {data?.spoken_languages?.length>0 && (
+                                            <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
+                                                <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
+                                                    <span className='font-bold'>{data?.spoken_languages?.length===1 ? "Language:" : "Languages:"}</span>
+                                                    <span className='opacity-70'>
+                                                        {data?.spoken_languages.map((language,idx) => (
+                                                            <span key={idx}>
+                                                                {language?.english_name}
+                                                                {idx!==data?.spoken_languages?.length-1 ? ", " : ""}
+                                                            </span>
+                                                        ))}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
                                         {directors?.length>0 && (
                                             <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
                                                 <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
-                                                    <span className='font-bold'>Directors:</span>
+                                                    <span className='font-bold'>{directors?.length===1 ? "Director:" : "Directors:"}</span>
                                                     <span className='opacity-70'>
                                                         {directors.map((director,idx) => (
                                                             <span key={idx}>
@@ -201,7 +223,7 @@ const DetailsBanner = ({video,crew}) => {
                                         {writers?.length>0 && (
                                             <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
                                                 <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
-                                                    <span className='font-bold'>Writers:</span>
+                                                    <span className='font-bold'>{writers?.length===1 ? "Writer:" : "Writers:"}</span>
                                                     <span className='opacity-70'>
                                                         {writers.map((writer,idx) => (
                                                             <span key={idx}>
@@ -216,7 +238,7 @@ const DetailsBanner = ({video,crew}) => {
                                         {data?.created_by?.length>0 && (
                                             <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
                                                 <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
-                                                    <span className='font-bold'>Creators:</span>
+                                                    <span className='font-bold'>{data?.created_by?.length===1 ? "Creator:" : "Creators:"}</span>
                                                     <span className='opacity-70'>
                                                         {data?.created_by?.map((creator,idx) => (
                                                             <span key={idx}>
@@ -312,11 +334,14 @@ const DetailsBanner = ({video,crew}) => {
                                     <div className="w-[100px] h-full rounded-full skeleton"></div>
                                     <div className="w-[80px] h-full rounded-full skeleton"></div>
                                 </div>
-                                <div className="flex space-x-4 mb-6">
-                                    <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-full skeleton"></div>
-                                    <div className="flex items-center space-x-3">
+                                <div className="flex space-x-3 mb-6">
+                                    <div className='flex justify-center items-center gap-2'>
                                         <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-full skeleton"></div>
-                                        <div className="w-[100px] md:w-[150px] h-[25px] md:h-[30px] rounded-full skeleton"></div>
+                                        <div className='w-[60px] md:w-[80px] h-[50px] lg:h-[30px] rounded-md lg:rounded-full skeleton'></div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-full skeleton"></div>
+                                        <div className="w-[60px] md:w-[80px] lg:w-[150px] h-[50px] lg:h-[30px] rounded-md lg:rounded-full skeleton"></div>
                                     </div>
                                 </div>
                                 <div className="w-[250px] h-[25px] md:h-[30px] rounded-full mb-6 skeleton"></div>
@@ -326,6 +351,7 @@ const DetailsBanner = ({video,crew}) => {
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-8 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
+                                <div className="w-1/2 md:w-1/3 h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-1/2 md:w-1/3 h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-2/3 md:w-1/3 h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-4 skeleton"></div>

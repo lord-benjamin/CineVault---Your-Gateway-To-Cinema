@@ -25,7 +25,6 @@ const SeasonDetails = () => {
             trailer = i;
         }
     }
-
     return (
         <div>
             <SeasonDetailsBanner video={videos?.results?.[trailer]} />

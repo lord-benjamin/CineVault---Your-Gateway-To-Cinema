@@ -47,11 +47,11 @@ const SeasonImages = ({ data, loading }) => {
                     {!loading ? (
                         <div className="imageDiv flex gap-[10px] overflow-x-auto mx-[-20px] py-0 px-[20px] md:gap-[20px] md:m-0 md:p-0" ref={carouselContainer}>
                         {/* {console.log(data)} */}
-                            {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Posters</div> : data?.map((image) => {
+                            {data?.length===0 ? <div className="text-white text-sm md:text-base italic opacity-75">No Posters</div> : data?.map((image,idx) => {
                                 {/* console.log(video) */}
                                 let imgUrl = (image?.file_path) ? url.poster+image?.file_path : PosterFallback;
                                 return (
-                                    <div key={image.id} className="poster-block relative w-[125px] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] flex-shrink-0 aspect-[2/3] bg-cover bg-center flex items-end justify-between p-[10px]">
+                                    <div key={idx} className="poster-block relative w-[125px] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] flex-shrink-0 aspect-[2/3] bg-cover bg-center flex items-end justify-between p-[10px]">
                                         <Img src={imgUrl} />
                                     </div>
                                 )
