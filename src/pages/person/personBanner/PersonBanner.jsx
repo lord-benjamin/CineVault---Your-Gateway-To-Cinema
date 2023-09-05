@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import {BiLinkExternal} from "react-icons/bi"
+import {FaImdb} from "react-icons/fa";
 import {BsFacebook,BsInstagram,BsTiktok,BsTwitter,BsYoutube} from "react-icons/bs"
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper.jsx";
@@ -27,10 +28,54 @@ const PersonBanner = () => {
         3: "Non-Binary"
     }
 
-    const showSocialMedia = () => {
-
+    const getAge = (birthday, deathday) => {
+        if(deathday === null){
+            const bdayYear = parseInt(dayjs(birthday).format("YYYY"));
+            const bdayMonth = parseInt(dayjs(birthday).format("MM"));
+            const bdayDate = parseInt(dayjs(birthday).format("DD"));
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth()+1;
+            const currentDate = today.getDate();
+            if(currentMonth > bdayMonth){
+                return `${currentYear-bdayYear}`;
+            }
+            else if(currentMonth < bdayMonth){
+                return `${currentYear-bdayYear-1}`;
+            }
+            else{
+                if(currentDate < bdayDate){
+                    return `${currentYear-bdayYear-1}`;
+                }
+                else{
+                    return `${currentYear-bdayYear}`;
+                }
+            }
+        }
+        else{
+            const bdayYear = parseInt(dayjs(birthday).format("YYYY"));
+            const bdayMonth = parseInt(dayjs(birthday).format("MM"));
+            const bdayDate = parseInt(dayjs(birthday).format("DD"));
+            const ddayYear = parseInt(dayjs(deathday).format("YYYY"));
+            const ddayMonth = parseInt(dayjs(deathday).format("MM"));
+            const ddayDate = parseInt(dayjs(deathday).format("DD"));
+            if(ddayMonth > bdayMonth){
+                return `${ddayYear-bdayYear}`;
+            }
+            else if(ddayMonth < bdayMonth){
+                return `${ddayYear-bdayYear-1}`;
+            }
+            else{
+                if(ddayDate < bdayDate){
+                    return `${ddayYear-bdayYear-1}`;
+                }
+                else{
+                    return `${ddayYear-bdayYear}`;
+                }
+            }
+        }
     }
-
+    // console.log(data);
     return (
         <div className='w-full bg-black1 pt-28 mb-12 md:mb-16 md:pt-36 min-h-[700px] relative'>
             {(!loading && !externalIdLoading) ? (
@@ -89,6 +134,14 @@ const PersonBanner = () => {
                                                         {`${data?.deathday ? dayjs(data?.deathday).format("D MMMM, YYYY") : "Alive"}`}
                                                     </span>
                                                 </div>
+                                                {!data?.birthday ? null : (
+                                                    <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
+                                                        <span className='font-bold'>{data?.deathday ? "Aged:" : "Age:"}</span>
+                                                        <span className='opacity-70'>
+                                                            {getAge(data?.birthday,data?.deathday)} Yrs.
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
                                         )}
                                         {!((data?.place_of_birth && data?.place_of_birth!=="") || (data?.gender)) ? null : (
@@ -121,8 +174,18 @@ const PersonBanner = () => {
                                                 </div>
                                             </div>
                                         )}
-                                        {!(externalId?.facebook_id || externalId.instagram_id || externalId?.tiktok_id || externalId?.twitter_id || externalId?.youtube_id) ? null : (
+                                        {!(externalId?.imdb_id || externalId?.facebook_id || externalId.instagram_id || externalId?.tiktok_id || externalId?.twitter_id || externalId?.youtube_id) ? null : (
                                             <div className='border-b border-white border-opacity-30 flex items-baseline justify-between space-x-4 py-2 md:py-4 px-0'>
+                                                {!externalId?.imdb_id ? null : (
+                                                    <a href={"https://imdb.com/name/"+externalId?.imdb_id} target='__blank'>
+                                                        <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
+                                                            <span className='font-bold hidden md:flex'>IMDb</span>
+                                                            <span className='opacity-100 md:opacity-70 font-bold flex justify-center items-center md:text-xl'>
+                                                                <FaImdb/>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                )}
                                                 {!externalId?.facebook_id ? null : (
                                                     <a href={"https://facebook.com/"+externalId?.facebook_id} target='__blank'>
                                                         <div className='flex justify-center items-center text-md md:text-[12px] gap-2 hover:text-orange duration-200 cursor-pointer' style={{flexFlow: "row wrap"}}>
