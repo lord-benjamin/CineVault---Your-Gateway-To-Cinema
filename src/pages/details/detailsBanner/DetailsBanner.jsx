@@ -256,7 +256,7 @@ const DetailsBanner = ({video,crew}) => {
                                                     <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
                                                         <span className='font-bold'>Budget:</span>
                                                         <span className='opacity-70'>
-                                                            {moneyConvert(data?.budget)}
+                                                            ${moneyConvert(data?.budget)}
                                                         </span>
                                                     </div>
                                                 )}
@@ -264,7 +264,7 @@ const DetailsBanner = ({video,crew}) => {
                                                     <div className='flex text-xs md:text-base gap-y-0 gap-x-2' style={{flexFlow: "row wrap"}}>
                                                         <span className='font-bold'>Revenue:</span>
                                                         <span className='opacity-70'>
-                                                            {moneyConvert(data?.revenue)}
+                                                            ${moneyConvert(data?.revenue)}
                                                         </span>
                                                     </div>
                                                 )}
