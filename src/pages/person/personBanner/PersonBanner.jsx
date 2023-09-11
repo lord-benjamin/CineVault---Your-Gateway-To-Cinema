@@ -122,6 +122,7 @@ const PersonBanner = () => {
                                                         Happy exploring! 🚀📽️`,
                                                     }} 
                                                     sites={["facebook","twitter","whatsapp","reddit","telegram","linkedin","mail","copy"]}
+                                                    disableNative={true}
                                                 >
                                                     <button className='flex items-center space-x-2 md:space-x-3'>
                                                         <span className='text-xl md:text-4xl'><BsFillShareFill/></span>
