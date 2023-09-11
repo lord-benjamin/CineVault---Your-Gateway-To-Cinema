@@ -115,12 +115,10 @@ const PersonBanner = () => {
                                             <div className='hover:text-orange cursor-pointer duration-200 w-max'>
                                                 <RWebShare
                                                     data={{
-                                                        title:`Share · ${data?.name} · CineVault`,
+                                                        title: `Share · ${data?.name} · CineVault`,
                                                         text: `Just stumbled upon ${data?.name} on CineVault, the ultimate movie lover's paradise!🎬
                                                         From comprehensive movie details to in-depth insights, CineVault is a treasure trove for film enthusiasts like me. ✨
-
                                                         Discover the fascinating ${data?.name} at ${window.location.href} 🍿 and explore more on CineVault: https://cinevault-cinema.vercel.app/ 🎥.
-                                                        
                                                         Happy exploring! 🚀📽️`,
                                                     }} 
                                                     sites={["facebook","twitter","whatsapp","reddit","telegram","linkedin","mail","copy"]}
