@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import {BiLinkExternal} from "react-icons/bi"
 import {FaImdb} from "react-icons/fa";
-import {BsFacebook,BsInstagram,BsTiktok,BsTwitter,BsYoutube} from "react-icons/bs"
+import {BsFacebook,BsInstagram,BsTiktok,BsTwitter,BsYoutube,BsFillShareFill} from "react-icons/bs"
+import { RWebShare } from 'react-web-share';
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper.jsx";
 import useFetch from '../../../hooks/useFetch';
@@ -100,16 +101,37 @@ const PersonBanner = () => {
                                                 {dayjs(data?.birthday).format("YYYY")} - {`${data?.deathday ? dayjs(data?.deathday).format("YYYY") : "Current"}`}
                                             </div>
                                         )}
-                                        {!(data?.homepage && data?.homepage!=="") ? null : (
-                                            <div className='hover:text-orange cursor-pointer mb-6 duration-200 w-max'>
-                                                <a href={data?.homepage} target='_blank' rel='noreferrer'>
-                                                    <div className="flex items-center space-x-2 md:space-x-3">
-                                                        <span className='text-3xl md:text-4xl'><BiLinkExternal/></span>
-                                                        <h1 className='text-sm md:text-lg text-center'>Visit Person Homepage</h1>
-                                                    </div>
-                                                </a>
+                                        <div className='flex lg:flex-row flex-col justify-between lg:items-center mb-6 space-y-3 md:space-y-5 lg:space-y-0'>
+                                            {!(data?.homepage && data?.homepage!=="") ? null : (
+                                                <div className='hover:text-orange cursor-pointer duration-200 w-max'>
+                                                    <a href={data?.homepage} target='_blank' rel='noreferrer'>
+                                                        <div className="flex items-center space-x-2 md:space-x-3">
+                                                            <span className='text-3xl md:text-4xl'><BiLinkExternal/></span>
+                                                            <h1 className='text-sm md:text-lg text-center'>Visit Person Homepage</h1>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            )}
+                                            <div className='hover:text-orange cursor-pointer duration-200 w-max'>
+                                                <RWebShare
+                                                    data={{
+                                                        title:`Share · ${data?.name} · CineVault`,
+                                                        text: `Just stumbled upon ${data?.name} on CineVault, the ultimate movie lover's paradise!🎬
+                                                        From comprehensive movie details to in-depth insights, CineVault is a treasure trove for film enthusiasts like me. ✨
+
+                                                        Discover the fascinating ${data?.name} at ${window.location.href} 🍿 and explore more on CineVault: https://cinevault-cinema.vercel.app/ 🎥.
+                                                        
+                                                        Happy exploring! 🚀📽️`,
+                                                    }} 
+                                                    sites={["facebook","twitter","whatsapp","reddit","telegram","linkedin","mail","copy"]}
+                                                >
+                                                    <button className='flex items-center space-x-2 md:space-x-3'>
+                                                        <span className='text-xl md:text-4xl'><BsFillShareFill/></span>
+                                                        <h1 className='text-sm md:text-lg text-center'>Share</h1>
+                                                    </button>
+                                                </RWebShare>
                                             </div>
-                                        )}
+                                        </div>
                                         {!(data?.biography && data?.biography!=="") ? null : (
                                             <div className='mb-4 md:mb-6'>
                                                 <div className='text-md md:text-xl mb-2 md:mb-1'>About</div>
@@ -252,7 +274,10 @@ const PersonBanner = () => {
                             <div className="w-full">
                                 <div className="w-full md:w-3/4 h-[30px] md:h-[40px] mb-3 rounded-full skeleton"></div>
                                 <div className="w-1/3 md:1/4 h-[20px] md:h-[25px] mb-4 rounded-full skeleton"></div>
-                                <div className="w-[250px] h-[25px] md:h-[30px] rounded-full mb-6 skeleton"></div>
+                                <div className='flex lg:flex-row flex-col justify-between lg:items-center mb-6 space-y-3 md:space-y-5 lg:space-y-0'>
+                                    <div className="w-[250px] h-[25px] md:h-[30px] rounded-full skeleton"></div>
+                                    <div className="w-[150px] h-[25px] md:h-[30px] rounded-full skeleton"></div>
+                                </div>
                                 <div className="w-[150px] h-[25px] md:h-[30px] rounded-full mb-3 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-3 skeleton"></div>
                                 <div className="w-full h-[20px] md:h-[25px] rounded-full mb-3 skeleton"></div>
