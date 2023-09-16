@@ -46,7 +46,7 @@ const SeasonDetailsBanner = ({video}) => {
                                                     <CircularRating rating={data?.vote_average.toFixed(1)} />
                                                 </div>
                                                 {!data?.vote_count ? null : (
-                                                    <div className='text-xs text-center md:text-sm font-semibold text-white border-2 border-orange p-1 md:p-2 rounded-md md:rounded-lg uppercase'>
+                                                    <div className='text-xs text-center md:text-sm font-semibold text-white border border-orange p-1 md:p-2 rounded-md md:rounded-lg uppercase bg-black2'>
                                                         {data?.vote_count} voted
                                                     </div>
                                                 )}
